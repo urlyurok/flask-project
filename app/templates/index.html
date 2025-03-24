@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Проект{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Навигационное меню -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('main.index') }}" class="nav-link"><i class="fas fa-home"></i> Главная</a></li>
+                <li><a href="{{ url_for('main.categories') }}" class="nav-link"><i class="fas fa-th-large"></i>
+                        Категории</a></li>
+                <li><a href="{{ url_for('main.products') }}" class="nav-link"><i class="fas fa-cogs"></i> Продукты</a>
+                </li>
+                <li><a href="{{ url_for('main.sales') }}" class="nav-link"><i class="fas fa-dollar-sign"></i>
+                        Продажи</a></li>
+                <li><a href="{{ url_for('main.top_products') }}" class="nav-link"><i class="fas fa-chart-line"></i> Топ
+                        Продукты</a></li> <!-- Добавлена ссылка на топ продукты -->
+            </ul>
+        </nav>
+    </header>
+
+    {% if request.endpoint == 'main.index' %}
+    <div class="banner">
+        <h1> Улыбнись! </h1>
+    </div>
+    {% endif %}
+
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="flashes">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}
+        <div class="home-cards">
+            <div class="card">
+                <h3>Категории</h3>
+                <p>Управляйте категориями продуктов</p>
+                <a href="{{ url_for('main.categories') }}" class="btn btn-primary">Перейти</a>
+            </div>
+            <div class="card">
+                <h3>Продукты</h3>
+                <p>Добавляйте и редактируйте продукты</p>
+                <a href="{{ url_for('main.products') }}" class="btn btn-primary">Перейти</a>
+            </div>
+            <div class="card">
+                <h3>Продажи</h3>
+                <p>Просматривайте и редактируйте продажи</p>
+                <a href="{{ url_for('main.sales') }}" class="btn btn-primary">Перейти</a>
+            </div>
+            <div class="card">
+                <h3>Топ Продукты</h3> <!-- Добавлена новая карта для топ продуктов -->
+                <p>Посмотрите самые продаваемые продукты</p>
+                <a href="{{ url_for('main.top_products') }}" class="btn btn-primary">Перейти</a>
+            </div>
+        </div>
+        {% endblock %}
+    </div>
+
+    <footer>
+        <p>© Рабочий Работает</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

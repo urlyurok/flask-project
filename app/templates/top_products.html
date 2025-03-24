@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+
+{% block title %}Топ-продукты{% endblock %}
+
+{% block content %}
+<h1>Топ-продукты по продажам</h1>
+
+<!-- Таблица с топ-продуктами -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Продукт</th>
+            <th>Общее количество</th>
+            <th>Общий доход</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in top_products %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.total_quantity }}</td>
+            <td>{{ product.total_income | round(2) }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

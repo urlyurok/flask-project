@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+
+{% block title %}Редактировать категорию{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Редактировать категорию "{{ category.name }}"</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }} <!-- CSRF token -->
+        <div class="mb-3">
+            <label for="name" class="form-label">Название категории:</label>
+            {{ form.name(class="form-control", value=form.name.data) }} <!-- Используем значение из формы -->
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a href="{{ url_for('main.categories') }}" class="btn btn-secondary">Назад</a>
+    </form>
+</div>
+{% endblock %}

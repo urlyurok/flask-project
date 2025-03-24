@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+
+{% block title %}Создание категории{% endblock %}
+
+{% block content %}
+<h1>Добавить новую категорию</h1>
+
+{% if form.errors %}
+<div class="errors">
+    <ul>
+        {% for field, errors in form.errors.items() %}
+        <li><strong>{{ field }}:</strong>
+            <ul>
+                {% for error in errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<form action="{{ url_for('main.create_category') }}" method="post">
+    {{ form.hidden_tag() }} <!-- скрытые поля для CSRF -->
+    <label for="name">Название категории:</label>
+    <input type="text" id="name" name="name" value="{{ form.name.data }}" required>
+
+    <button type="submit">Добавить</button>
+</form>
+
+<br>
+<a href="{{ url_for('main.categories') }}">Назад к категориям</a>
+{% endblock %}

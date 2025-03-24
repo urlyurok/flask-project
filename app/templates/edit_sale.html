@@ -1,0 +1,70 @@
+{% extends 'index.html' %}
+
+{% block title %}Редактирование продажи{% endblock %}
+
+{% block content %}
+<h1>Редактирование продажи</h1>
+
+<!-- Добавим стиль для формы -->
+<style>
+    form {
+        max-width: 500px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    input {
+        width: 100%;
+        padding: 8px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button {
+        padding: 10px 15px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    a {
+        text-decoration: none;
+        color: #007bff;
+        font-size: 16px;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<form method="POST">
+    <label for="quantity">Количество:</label>
+    <input type="number" id="quantity" name="quantity" value="{{ sale.quantity }}" min="1" required>
+
+    <label for="discount">Скидка (%):</label>
+    <input type="number" id="discount" name="discount" value="{{ sale.discount * 100 }}" min="0" max="100" step="0.01"
+        required>
+
+    <button type="submit">Сохранить</button>
+    <a href="{{ url_for('main.sales') }}">Отмена</a>
+</form>
+
+{% endblock %}
